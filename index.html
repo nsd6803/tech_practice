@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>90 лет МГУПИ · 1936–2026 · от чертёжной доски к искусственному интеллекту</title>
+  <meta name="description" content="Интерактивная история одного вуза: от Московского заочного института металлообрабатывающей промышленности (1936) до Института перспективных технологий РТУ МИРЭА. Девяносто лет инженерной мысли." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Lenis (smooth scroll) -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.23/dist/lenis.css" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== ЗАГРУЗКА ===== -->
+  <div class="loader" id="loader">
+    <div class="loader__inner">
+      <div class="loader__num" id="loaderNum">1936</div>
+      <div class="loader__line"><span id="loaderBar"></span></div>
+      <div class="loader__cap">архив открывается</div>
+    </div>
+  </div>
+
+  <!-- ===== ПРОГРЕСС ===== -->
+  <div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- ===== ШАПКА ===== -->
+  <header class="topbar" id="topbar">
+    <a href="#top" class="topbar__brand">
+      <span class="topbar__mark">90</span>
+      <span class="topbar__txt">лет МГУПИ</span>
+    </a>
+    <nav class="topbar__nav" aria-label="Разделы">
+      <a href="#timeline">Хроника</a>
+      <a href="#names">Имена</a>
+      <a href="#today">Сегодня</a>
+      <a href="#capsule">Капсула</a>
+    </nav>
+    <div class="topbar__years"><span id="topYear">1936</span> → 2026</div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== ГЕРОЙ ===== -->
+    <section class="hero" id="hero">
+      <div
+        class="hero__bg"
+        id="heroBg"
+        aria-hidden="true"
+        style="background-image: url('https://avatars.mds.yandex.net/get-altay/10632051/2a0000019150623475018cf1e9429e77b77a/orig')"
+      ></div>
+      <div class="hero__bg-overlay" aria-hidden="true"></div>
+
+      <div class="hero__grain" aria-hidden="true"></div>
+      <div class="hero__bignum" aria-hidden="true">
+        <span data-parallax="0.3">90</span>
+      </div>
+
+      <div class="hero__content">
+        <div class="hero__eyebrow">
+          <span class="dot"></span>
+          1936 — 2026 · девяносто лет
+        </div>
+        <h1 class="hero__title">
+          <span class="hero__word">От</span>
+          <span class="hero__word hero__word--accent">чертёжной&nbsp;доски</span>
+          <span class="hero__word">к</span>
+          <span class="hero__word hero__word--accent">искусственному&nbsp;интеллекту</span>
+        </h1>
+        <p class="hero__lead">
+          Девять десятилетий один и тот же институт менял имена, корпуса и эпохи —
+          от подготовки инженеров для первых пятилеток до кафедр кибербезопасности
+          и нейротехнологий. Это история МГУПИ, рассказанная по годам.
+        </p>
+        <div class="hero__scroll">
+          <span>листайте вниз</span>
+          <span class="hero__scroll-line" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <!-- живой счётчик прожитых лет -->
+      <div class="hero__counter" aria-hidden="true">
+        <div class="hero__counter-num" id="ageCounter">0</div>
+        <div class="hero__counter-lbl">лет в строю</div>
+      </div>
+    </section>
+
+    <!-- ===== ИНТРО К ХРОНИКЕ ===== -->
+    <section class="intro" id="intro">
+      <p class="intro__kicker">Хроника</p>
+      <h2 class="intro__h">
+        Один вуз — <em>шесть имён</em>, <em>девять эпох</em>
+        и непрерывная линия инженерной мысли длиною в&nbsp;90&nbsp;лет.
+      </h2>
+      <p class="intro__sub">
+        Прокрутите вправо — лента поведёт вас от приказа 1936 года
+        до искусственного интеллекта наших дней.
+      </p>
+    </section>
+
+    <!-- ===== ТАЙМЛАЙН (горизонтальный пиннинг) ===== -->
+    <section class="timeline" id="timeline">
+      <div class="timeline__track" id="timelineTrack">
+
+        <article class="ms" data-year="1936">
+          <div class="ms__year">1936</div>
+          <div class="ms__rail" aria-hidden="true"></div>
+          <div class="ms__card">
+            <div class="ms__tag">основание</div>
+            <h3 class="ms__name">Московский заочный институт металлообрабатывающей промышленности</h3>
+            <p class="ms__abbr">МЗИМП</p>
+            <p class="ms__text">
+              16 сентября приказом Наркомата местной промышленности РСФСР № 1168
+              учреждается новый вуз. Задача времени — готовить инженеров
+              для индустриализации страны в годы первых пятилеток.
+            </p>
+          </div>
+        </article>
+
+        <article class="ms" data-year="1938">
+          <div class="ms__year">1938</div>
+          <div class="ms__rail" aria-hidden="true"></div>
+          <div class="ms__card">
+            <div class="ms__tag">становление</div>
+            <h3 class="ms__name">Два факультета, тринадцать кафедр</h3>
+            <p class="ms__abbr">механический · энергетический</p>
+            <p class="ms__text">
+              Складывается структура: механический и энергетический факультеты,
+              кафедры от высшей математики и физики до теории резания и технологии
+              машиностроения. Параллельно растёт сеть филиалов по всему Союзу.
+            </p>
+          </div>
+        </article>
+
+        <article class="ms ms--war" data-year="1941">
+          <div class="ms__year">1941<span class="ms__year-sub">–1945</span></div>
+          <div class="ms__rail" aria-hidden="true"></div>
+          <div class="ms__card">
+            <div class="ms__tag ms__tag--war">война</div>
+            <h3 class="ms__name">Институт остаётся в Москве</h3>
+            <p class="ms__abbr">кадры для фронта и тыла</p>
+            <p class="ms__text">
+              МЗИМП не был эвакуирован и готовил специалистов для военной
+              промышленности, помогая налаживать выпуск оборонной продукции на
+              эвакуированных заводах. Преподаватели уходили в ополчение и строили
+              укрепрайоны вокруг столицы. К 1945-му — снова три факультета.
+            </p>
+          </div>
+        </article>
+
+        <article class="ms" data-year="1950">
+          <div class="ms__year">1950</div>
+          <div class="ms__rail" aria-hidden="true"></div>
+          <div class="ms__card">
+            <div class="ms__tag">всесоюзный масштаб</div>
+            <h3 class="ms__name">Всесоюзный заочный машиностроительный институт</h3>
+            <p class="ms__abbr">ВЗМИ</p>
+            <p class="ms__text">
+              Распоряжением Совмина СССР институт реорганизован в ВЗМИ.
+              Начинается превращение в один из крупнейших технических вузов
+              страны — базовый центр заочного и вечернего инженерного образования.
+            </p>
+          </div>
+        </article>
+
+        <article class="ms" data-year="1970">
+          <div class="ms__year">1960<span class="ms__year-sub">–1980</span></div>
+          <div class="ms__rail" aria-hidden="true"></div>
+          <div class="ms__card">
+            <div class="ms__tag">расцвет</div>
+            <h3 class="ms__name">25 000 студентов</h3>
+            <p class="ms__abbr">пик заочного образования</p>
+            <p class="ms__text">
+              Модернизация лабораторной базы, масштабные научно-исследовательские
+              работы, тесная связь с предприятиями. До середины 1980-х ВЗМИ —
+              базовый вуз системы образования без отрыва от производства.
+            </p>
+          </div>
+        </article>
+
+        <article class="ms" data-year="1980">
+          <div class="ms__year">1980</div>
+          <div class="ms__rail" aria-hidden="true"></div>
+          <div class="ms__card">
+            <div class="ms__tag">первая ЭВМ</div>
+            <h3 class="ms__name">Один из крупнейших вузовских вычислительных центров</h3>
+            <p class="ms__abbr">ЭВМ ЕС-1033</p>
+            <p class="ms__text">
+              Во ВЗМИ создаётся мощный вычислительный центр на базе ЕС-1033 —
+              в 1998-м он станет Главным информационно-вычислительным центром
+              Минобрнауки. Институт делает первый шаг к информатике.
+            </p>
+          </div>
+        </article>
+
+        <article class="ms" data-year="1988">
+          <div class="ms__year">1988</div>
+          <div class="ms__rail" aria-hidden="true"></div>
+          <div class="ms__card">
+            <div class="ms__tag">поворот к приборам</div>
+            <h3 class="ms__name">Московский институт приборостроения</h3>
+            <p class="ms__abbr">МИП</p>
+            <p class="ms__text">
+              ВЗМИ преобразован в Московский институт приборостроения с дневной,
+              вечерней и заочной формами. В начале 90-х появляются факультеты
+              информатики, радиоэлектроники, технических систем с искусственным
+              интеллектом.
+            </p>
+          </div>
+        </article>
+
+        <article class="ms" data-year="1994">
+          <div class="ms__year">1994</div>
+          <div class="ms__rail" aria-hidden="true"></div>
+          <div class="ms__card">
+            <div class="ms__tag">академия</div>
+            <h3 class="ms__name">Московская государственная академия приборостроения и информатики</h3>
+            <p class="ms__abbr">МГАПИ</p>
+            <p class="ms__text">
+              1 июля институт становится академией. Открываются факультет работы
+              с иностранными студентами (более 30 стран), кафедры защиты информации
+              и наноматериалов, Институт технической эстетики и дизайна.
+            </p>
+          </div>
+        </article>
+
+        <article class="ms" data-year="2005">
+          <div class="ms__year">2005</div>
+          <div class="ms__rail" aria-hidden="true"></div>
+          <div class="ms__card">
+            <div class="ms__tag">университет</div>
+            <h3 class="ms__name">Московский государственный университет приборостроения и информатики</h3>
+            <p class="ms__abbr">МГУПИ</p>
+            <p class="ms__text">
+              Академия получает статус университета. В структуре — 11 факультетов,
+              50 кафедр, 11 филиалов, подготовка по 33 специальностям. В 2010-м
+              МГУПИ присвоен статус инновационной площадки.
+            </p>
+          </div>
+        </article>
+
+        <article class="ms ms--now" data-year="2015">
+          <div class="ms__year">2015</div>
+          <div class="ms__rail" aria-hidden="true"></div>
+          <div class="ms__card">
+            <div class="ms__tag ms__tag--now">новая глава</div>
+            <h3 class="ms__name">В составе РТУ МИРЭА</h3>
+            <p class="ms__abbr">Российский технологический университет</p>
+            <p class="ms__text">
+              МГУПИ входит в МИРЭА. Инженерная школа 1936 года продолжается в
+              Институте перспективных технологий и индустриального программирования —
+              там, где сегодня учат искусственному интеллекту, кибербезопасности
+              и компьютерному дизайну.
+            </p>
+          </div>
+        </article>
+
+        <article class="ms ms--final" data-year="2026">
+          <div class="ms__year">2026</div>
+          <div class="ms__rail" aria-hidden="true"></div>
+          <div class="ms__card ms__card--final">
+            <div class="ms__tag ms__tag--now">90 лет</div>
+            <h3 class="ms__name">Девяносто лет спустя</h3>
+            <p class="ms__abbr">от металлообработки к ИИ</p>
+            <p class="ms__text">
+              Одна непрерывная линия: чертёжные доски первых пятилеток,
+              ЭВМ восьмидесятых, нейросети двадцатых. Меняются имена и
+              технологии — остаётся инженерная мысль.
+            </p>
+          </div>
+        </article>
+
+      </div>
+      <div class="timeline__hint" id="timelineHint" aria-hidden="true">
+        прокрутка ведёт ленту →
+      </div>
+    </section>
+
+    <!-- ===== ИМЕНА (морфинг аббревиатур) ===== -->
+    <section class="names" id="names">
+      <p class="names__kicker">Шесть имён одного вуза</p>
+      <div class="names__stage">
+        <div class="names__abbr" id="namesAbbr">МЗИМП</div>
+        <div class="names__full" id="namesFull">Московский заочный институт металлообрабатывающей промышленности</div>
+        <div class="names__year" id="namesYear">1936</div>
+      </div>
+      <div class="names__list" id="namesList" role="list">
+        <!-- заполняется из JS, но дублируем семантически -->
+      </div>
+    </section>
+
+    <!-- ===== СЕГОДНЯ (счётчики + направления) ===== -->
+    <section class="today" id="today">
+      <div class="today__head">
+        <p class="today__kicker">Современный образ</p>
+        <h2 class="today__h">Тот же институт — на языке XXI века</h2>
+      </div>
+
+      <div class="stats" id="stats">
+        <div class="stat">
+          <div class="stat__num" data-count="90" data-suffix="">0</div>
+          <div class="stat__lbl">лет истории</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num" data-count="6" data-suffix="">0</div>
+          <div class="stat__lbl">названий с 1936-го</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num" data-count="33" data-suffix="+">0</div>
+          <div class="stat__lbl">специальности к 2005-му</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num" data-count="30" data-suffix="+">0</div>
+          <div class="stat__lbl">стран среди студентов</div>
+        </div>
+      </div>
+
+      <div class="dirs">
+        <article class="dir"><span class="dir__i">01</span><h3>Искусственный интеллект</h3><p>От «технических систем с искусственным интеллектом» 90-х к профильным программам по ИИ.</p></article>
+        <article class="dir"><span class="dir__i">02</span><h3>Кибербезопасность</h3><p>Наследник кафедр защиты информации, открытых ещё в МГАПИ.</p></article>
+        <article class="dir"><span class="dir__i">03</span><h3>Приборостроение и радиоэлектроника</h3><p>Сердце вуза с 1988 года — точные приборы и электроника.</p></article>
+        <article class="dir"><span class="dir__i">04</span><h3>Компьютерный дизайн</h3><p>Линия Института технической эстетики и дизайна, начатая в 2000-х.</p></article>
+      </div>
+    </section>
+
+    <!-- ===== КАПСУЛА ВРЕМЕНИ (интерактив) ===== -->
+    <section class="capsule" id="capsule">
+      <div class="capsule__inner">
+        <p class="capsule__kicker">Капсула времени</p>
+        <h2 class="capsule__h">Оставьте послание следующим выпускникам</h2>
+        <p class="capsule__sub">
+          К 90-летию — цифровая капсула. Напишите пару строк тем,
+          кто откроет архив на 100-летие в 2036-м.
+        </p>
+
+        <div class="capsule__form">
+          <input class="capsule__input" id="capsuleName" type="text" maxlength="40" placeholder="Имя или группа (например, ТКМО-01-25)" autocomplete="off" />
+          <textarea class="capsule__text" id="capsuleMsg" maxlength="180" rows="3" placeholder="Послание в 2036 год…"></textarea>
+          <div class="capsule__row">
+            <span class="capsule__count"><span id="capsuleCount">0</span>/180</span>
+            <button class="capsule__btn" id="capsuleBtn" type="button">Запечатать послание</button>
+          </div>
+        </div>
+
+        <div class="capsule__sealed" id="capsuleSealed" hidden>
+          <div class="capsule__sealed-mark">✓ запечатано</div>
+          <p class="capsule__sealed-txt" id="capsuleSealedTxt"></p>
+          <p class="capsule__sealed-meta" id="capsuleSealedMeta"></p>
+          <button class="capsule__again" id="capsuleAgain" type="button">Написать ещё одно</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__big" aria-hidden="true">1936 → 2026</div>
+    <div class="footer__row">
+      <span>90 лет МГУПИ</span>
+      <span>от МЗИМП к Институту перспективных технологий РТУ МИРЭА</span>
+    </div>
+    <p class="footer__note">
+      Факты по официальной хронологии РТУ МИРЭА. Интерактивный проект к 90-летию вуза.
+    </p>
+  </footer>
+
+  <!-- ===== БИБЛИОТЕКИ ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
