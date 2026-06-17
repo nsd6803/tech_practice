@@ -48,6 +48,9 @@
 
     <!-- ===== ГЕРОЙ ===== -->
     <section class="hero" id="hero">
+      <!-- ====== ФОНОВАЯ КАРТИНКА HERO ======
+           Замените URL ниже на свою ссылку (style="background-image: url('ВАША_ССЫЛКА')").
+           Картинка растягивается на весь экран (100vw × 100vh, object-fit: cover). -->
       <div
         class="hero__bg"
         id="heroBg"
@@ -294,6 +297,29 @@
       </div>
     </section>
 
+
+    <!-- ===== ЦИТАТА (после карусели с именами) ===== -->
+    <section class="qs" id="qs">
+      <!-- ==============================
+           ФОНОВАЯ КАРТИНКА СЕКЦИИ ЦИТАТЫ
+           Замените URL ниже на свою ссылку.
+           ============================== -->
+      <div class="qs__bg" aria-hidden="true"
+           style="background-image: url('quote.jpg')"></div>
+      <div class="qs__overlay" aria-hidden="true"></div>
+      <div class="qs__inner">
+        <div class="qs__open" aria-hidden="true">«</div>
+        <blockquote class="qs__text">
+          Инженер — это человек, который умеет делать за один рубль то,
+          что любой дурак сделает за два.
+        </blockquote>
+        <p class="qs__author">
+          <span class="qs__dash">—</span>
+          Артур Мор Веллингтон, инженер-строитель
+        </p>
+      </div>
+    </section>
+
     <!-- ===== СЕГОДНЯ (счётчики + направления) ===== -->
     <section class="today" id="today">
       <div class="today__head">
@@ -325,6 +351,59 @@
         <article class="dir"><span class="dir__i">02</span><h3>Кибербезопасность</h3><p>Наследник кафедр защиты информации, открытых ещё в МГАПИ.</p></article>
         <article class="dir"><span class="dir__i">03</span><h3>Приборостроение и радиоэлектроника</h3><p>Сердце вуза с 1988 года — точные приборы и электроника.</p></article>
         <article class="dir"><span class="dir__i">04</span><h3>Компьютерный дизайн</h3><p>Линия Института технической эстетики и дизайна, начатая в 2000-х.</p></article>
+      </div>
+    </section>
+
+
+    <!-- ===== КВИЗ: знаток МГУПИ ===== -->
+    <section class="quiz" id="quiz">
+      <div class="quiz__inner">
+        <p class="quiz__kicker">Проверьте себя</p>
+        <h2 class="quiz__h">Знаете ли вы историю МГУПИ?</h2>
+        <p class="quiz__sub">5 вопросов — 3 правильных ответа и вы знаток</p>
+
+        <!-- прогресс-полоса -->
+        <div class="quiz__progress" aria-hidden="true">
+          <span class="quiz__progress-fill" id="quizProgressFill"></span>
+        </div>
+        <div class="quiz__progress-lbl">
+          <span id="quizProgressLbl">Вопрос 1 из 5</span>
+        </div>
+
+        <!-- карточка вопроса -->
+        <div class="quiz__card" id="quizCard">
+          <!-- картинка вопроса -->
+          <!-- ==============================
+               КАРТИНКИ КВИЗА
+               В JS ниже массив QUESTIONS содержит поле img для каждого вопроса.
+               Замените строки 'ВСТАВЬТЕ_ССЫЛКУ_НА_КАРТИНКУ_N.jpg' на свои URL.
+               ============================== -->
+          <div class="quiz__img-wrap">
+            <img class="quiz__img" id="quizImg" src="" alt="" />
+            <div class="quiz__img-placeholder" id="quizImgPlaceholder" aria-hidden="true">
+              [ картинка вопроса ]
+            </div>
+          </div>
+          <p class="quiz__question" id="quizQuestion"></p>
+          <div class="quiz__options" id="quizOptions" role="group" aria-label="Варианты ответа"></div>
+        </div>
+
+        <!-- результат -->
+        <div class="quiz__result" id="quizResult" hidden>
+          <div class="quiz__result-score" id="quizScore"></div>
+          <p class="quiz__result-msg" id="quizMsg"></p>
+          <button class="quiz__restart" id="quizRestart" type="button">Пройти снова</button>
+        </div>
+      </div>
+
+      <!-- 🏆 Поздравительное оверлейное окно -->
+      <div class="quiz__win" id="quizWin" hidden aria-live="assertive">
+        <div class="quiz__win-box">
+          <div class="quiz__win-icon" aria-hidden="true">🏆</div>
+          <h3 class="quiz__win-title">Вы — знаток МГУПИ!</h3>
+          <p class="quiz__win-sub">Правильных ответов больше трёх — вы отлично знаете историю университета.</p>
+          <button class="quiz__win-close" id="quizWinClose" type="button">Отлично!</button>
+        </div>
       </div>
     </section>
 
