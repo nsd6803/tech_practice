@@ -67,6 +67,8 @@
     initStats();
     initReveals();
     initCapsule();
+    initQuoteSection();
+    initQuiz();
 
     // финальный пересчёт после загрузки шрифтов/раскладки
     ScrollTrigger.refresh();
@@ -378,6 +380,211 @@
     });
   }
 
+
+  /* ===================================================
+     СЕКЦИЯ ЦИТАТЫ — reveal-анимация
+     =================================================== */
+  function initQuoteSection() {
+    if (prefersReduced) return;
+    const inner = document.querySelector('.qs__inner');
+    if (!inner) return;
+    gsap.from(inner, {
+      opacity: 0, y: 36, duration: 1.1, ease: 'power2.out',
+      scrollTrigger: { trigger: '.qs', start: 'top 75%', toggleActions: 'play none none none' }
+    });
+  }
+
+
+  /* ===================================================
+     КВИЗ
+     =================================================== */
+  function initQuiz() {
+    // ── ДАННЫЕ ──────────────────────────────────────
+    // Поле img — замените URL на свои картинки.
+    // Если оставить пустую строку, покажется текстовая заглушка.
+    const QUESTIONS = [
+      {
+        img: '1.jpg',
+        q: 'В каком году был основан МГУПИ (тогда ещё МЗИМП)?',
+        options: ['1929', '1936', '1944'],
+        correct: 1,
+      },
+      {
+        img: '2.jpg',
+        q: 'Как расшифровывается аббревиатура ВЗМИ?',
+        options: [
+          'Всесоюзный заочный машиностроительный институт',
+          'Высший заочный медицинский институт',
+          'Всесоюзный заочный математический институт',
+        ],
+        correct: 0,
+      },
+      {
+        img: '3.jpg',
+        q: 'В каком году МЗИМП был переименован во Всесоюзный заочный машиностроительный институт (ВЗМИ)?',
+        options: ['1945', '1950', '1955'],
+        correct: 1,
+      },
+      {
+        img: '4.jpg',
+        q: 'В каком году институт получил статус университета (МГУПИ)?',
+        options: ['1999', '2005', '2010'],
+        correct: 1,
+      },
+      {
+        img: '5.jpg',
+        q: 'В состав какого университета вошёл МГУПИ в 2015 году?',
+        options: ['МГТУ им. Баумана', 'МГУ им. Ломоносова', 'РТУ МИРЭА'],
+        correct: 2,
+      },
+    ];
+
+    const LETTERS = ['А', 'Б', 'В'];
+
+    // ── ЭЛЕМЕНТЫ ────────────────────────────────────
+    const card        = document.getElementById('quizCard');
+    const imgEl       = document.getElementById('quizImg');
+    const imgPhEl     = document.getElementById('quizImgPlaceholder');
+    const questionEl  = document.getElementById('quizQuestion');
+    const optionsEl   = document.getElementById('quizOptions');
+    const progressFill = document.getElementById('quizProgressFill');
+    const progressLbl  = document.getElementById('quizProgressLbl');
+    const resultEl    = document.getElementById('quizResult');
+    const scoreEl     = document.getElementById('quizScore');
+    const msgEl       = document.getElementById('quizMsg');
+    const restartBtn  = document.getElementById('quizRestart');
+    const winEl       = document.getElementById('quizWin');
+    const winCloseBtn = document.getElementById('quizWinClose');
+
+    if (!card) return; // секция не найдена
+
+    let current = 0;
+    let score   = 0;
+    let answered = false;
+
+    // ── РЕНДЕР ВОПРОСА ──────────────────────────────
+    function renderQuestion(idx) {
+      answered = false;
+      const q = QUESTIONS[idx];
+
+      // прогресс
+      const pct = ((idx) / QUESTIONS.length * 100).toFixed(0);
+      progressFill.style.width = pct + '%';
+      progressLbl.textContent  = `Вопрос ${idx + 1} из ${QUESTIONS.length}`;
+
+      // картинка
+      if (q.img && !q.img.startsWith('ВСТАВЬТЕ')) {
+        imgEl.src = q.img;
+        imgEl.alt = `Вопрос ${idx + 1}`;
+        imgEl.onload = () => imgEl.classList.add('is-loaded');
+        imgPhEl.style.display = 'none';
+      } else {
+        imgEl.src = '';
+        imgEl.classList.remove('is-loaded');
+        imgPhEl.style.display = 'flex';
+      }
+
+      // текст вопроса
+      questionEl.textContent = q.q;
+
+      // варианты
+      optionsEl.innerHTML = '';
+      q.options.forEach((text, i) => {
+        const btn = document.createElement('button');
+        btn.type      = 'button';
+        btn.className = 'quiz__opt';
+        btn.innerHTML = `<span class="quiz__opt-letter">${LETTERS[i]}</span><span>${text}</span>`;
+        btn.addEventListener('click', () => selectAnswer(i, q.correct));
+        optionsEl.appendChild(btn);
+      });
+
+      // анимация появления
+      if (!prefersReduced) {
+        gsap.from(card, { opacity: 0, y: 18, duration: 0.35, ease: 'power2.out', clearProps: 'all' });
+      }
+    }
+
+    // ── ВЫБОР ОТВЕТА ────────────────────────────────
+    function selectAnswer(chosen, correct) {
+      if (answered) return;
+      answered = true;
+
+      // блокируем и красим кнопки
+      const btns = optionsEl.querySelectorAll('.quiz__opt');
+      btns.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === correct)       btn.classList.add('is-correct');
+        else if (i === chosen)   btn.classList.add('is-wrong');
+      });
+
+      if (chosen === correct) score++;
+
+      // через 1.1 с — следующий вопрос или результат
+      setTimeout(() => {
+        current++;
+        if (current < QUESTIONS.length) {
+          renderQuestion(current);
+        } else {
+          showResult();
+        }
+      }, 1100);
+    }
+
+    // ── РЕЗУЛЬТАТ ───────────────────────────────────
+    function showResult() {
+      // прогресс 100%
+      progressFill.style.width = '100%';
+      progressLbl.textContent  = 'Результат';
+
+      card.hidden    = true;
+      resultEl.hidden = false;
+
+      scoreEl.textContent = `${score} / ${QUESTIONS.length}`;
+
+      if (score > 3) {
+        msgEl.textContent = 'Превосходно! История МГУПИ не имеет от вас секретов.';
+        // показываем поздравительный оверлей с небольшой задержкой
+        setTimeout(() => {
+          winEl.hidden = false;
+          if (!prefersReduced) {
+            gsap.from(winEl, { opacity: 0, duration: 0.4, ease: 'power2.out' });
+          }
+        }, 600);
+      } else if (score >= 3) {
+        msgEl.textContent = 'Хороший результат! Ещё немного — и вы знаток.';
+      } else {
+        msgEl.textContent = 'Неплохое начало! Пройдите хронику ещё раз — и все ответы станут очевидны.';
+      }
+    }
+
+    // ── ЗАКРЫТИЕ ОВЕРЛЕЯ ────────────────────────────
+    winCloseBtn.addEventListener('click', () => {
+      winEl.hidden = true;
+    });
+    // закрытие кликом по фону
+    winEl.addEventListener('click', (e) => {
+      if (e.target === winEl) winEl.hidden = true;
+    });
+    // закрытие по Esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !winEl.hidden) winEl.hidden = true;
+    });
+
+    // ── РЕСТАРТ ─────────────────────────────────────
+    restartBtn.addEventListener('click', () => {
+      current  = 0;
+      score    = 0;
+      answered = false;
+      winEl.hidden    = true;
+      resultEl.hidden = true;
+      card.hidden     = false;
+      renderQuestion(0);
+    });
+
+    // ── СТАРТ ───────────────────────────────────────
+    renderQuestion(0);
+  }
+
   /* ===== ИНИЦИАЛИЗАЦИЯ ===== */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', runLoader);
@@ -385,3 +592,6 @@
     runLoader();
   }
 })();
+
+
+
